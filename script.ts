@@ -59,34 +59,17 @@ function getOrder(word: string): number[] {
   return order;
 }
 
-const orderT: number[] = getOrder(keyWord);
-console.log(orderT);
+function transposeMatrix(matrix: Matrix): Matrix {
+  let trMatr: Matrix = [];
+  for (let i = 0; i < matrix[0].length; i++) {
+    trMatr[i] = [];
+    for (let j = 0; j < matrix.length; j++) {
+      trMatr[i][j] = matrix[j][i];
+    }
+  }
 
-// function transposeMatrix(matrix: Matrix, word: string): Matrix {
-//     let trMatrix: Matrix = matrix;
-
-//     for (let row = 0; row < matrix.length; row++) {
-//         let charC = orderT;
-//         // bubble sort
-//         for (let i = 0, endI = charC.length - 1; i < endI; i++) {
-//             for (let j = 0, endJ = endI - i; j < endJ; j++) {
-//                 if (charC[j] > charC[j + 1]) {
-//                     // order arr
-//                     let swap = charC[j];
-//                     charC[j] = charC[j + 1];
-//                     charC[j + 1] = swap;
-
-//                     // matrix
-//                     let temp = trMatrix[i][j];
-//                     trMatrix[i][j] = trMatrix[i][j + 1];
-//                     trMatrix[i][j + 1] = temp;
-//                 }
-//             }
-//         }
-//     }
-
-//     return trMatrix;
-// }
+  return trMatr;
+}
 
 function encrypteText(trMatrix: Matrix): string {
   let encText: string = "";
@@ -113,11 +96,15 @@ function decrypteText(text, word): string {
 
 const startMatrix: Matrix = createMatrix(str, keyWord); // преобразование строки в матрицу
 
-// const trMatrix: Matrix = transposeMatrix(startMatrix, keyWord);
+const orderT: number[] = getOrder(keyWord);
+const sortedOrder: number[] = bubbleSort(orderT);
+
+const trMatrix: Matrix = transposeMatrix(startMatrix);
 const encText: string = encrypteText(startMatrix); // шифрование текста
 // const decMatrix = createDecMatrix(encText, keyWord);
 
 console.log(startMatrix);
+console.log(trMatrix);
+console.log(transposeMatrix(trMatrix));
 console.log(encText);
-// console.log(orderT);
-// console.log(trMatrix);
+
