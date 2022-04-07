@@ -71,13 +71,42 @@ function transposeMatrix(matrix: Matrix): Matrix {
   return trMatr;
 }
 
-function encrypteText(trMatrix: Matrix): string {
+function encrypteText(str: string, keyWord: string): string {
+  const startMatrix: Matrix = createMatrix(str, keyWord); // преобразование строки в матрицу
+  const trMatrix: Matrix = transposeMatrix(startMatrix); // транспонирование матрицы
+
+  const orderT: number[] = getOrder(keyWord); // последовательность для шифрования
+  
+  for (let i = 0, endI = orderT.length - 1; i < endI; i++) {
+    for (let j = 0, endJ = endI - i; j < endJ; j++) {
+      if (orderT[j] > orderT[j + 1]) {
+        let swap = orderT[j];
+        orderT[j] = orderT[j + 1];
+        orderT[j + 1] = swap;
+
+        let tempEl = trMatrix[j];
+        trMatrix[j] = trMatrix[j + 1];
+        trMatrix[j + 1] = tempEl;
+      }
+    }
+  }
+
   let encText: string = "";
-  for (let j = 0; j < trMatrix[0].length; j++) {
-    for (let i = 0; i < trMatrix.length; i++) {
+
+  // classic reading
+
+  for (let i = 0; i < trMatrix.length; i++) {
+    for (let j = 0; j < trMatrix[0].length; j++) {
       encText += trMatrix[i][j];
     }
   }
+
+  // считывание в столбик
+  // for (let j = 0; j < trMatrix[0].length; j++) {
+  //   for (let i = 0; i < trMatrix.length; i++) {
+  //     encText += trMatrix[i][j];
+  //   }
+  // }
 
   return encText;
 }
@@ -94,17 +123,8 @@ function decrypteText(text, word): string {
     return
 }
 
-const startMatrix: Matrix = createMatrix(str, keyWord); // преобразование строки в матрицу
-
-const orderT: number[] = getOrder(keyWord);
-const sortedOrder: number[] = bubbleSort(orderT);
-
-const trMatrix: Matrix = transposeMatrix(startMatrix);
-const encText: string = encrypteText(startMatrix); // шифрование текста
+const encText: string = encrypteText(str, keyWord); // шифрование текста
 // const decMatrix = createDecMatrix(encText, keyWord);
 
-console.log(startMatrix);
-console.log(trMatrix);
-console.log(transposeMatrix(trMatrix));
 console.log(encText);
 
