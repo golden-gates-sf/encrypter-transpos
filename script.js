@@ -1,5 +1,5 @@
 var str = "hello000 world";
-var keyWord = "ESCAPE";
+var keyWord = "WONDER"; // without repeated letters !
 function createMatrix(text, keyword) {
     var matrix = [];
     var indexStr = 0;
@@ -16,21 +16,6 @@ function createMatrix(text, keyword) {
     }
     return matrix;
 }
-// function createDecMatrix(text: string, word: string): Matrix {
-//   let matrix: Matrix = [];
-//   let indexStr = 0;
-//   for (let j = 0; j < word.length; j++) {
-//     matrix[j] = [];
-//     for (let i = 0; i < Math.ceil(text.length / keyWord.length); i++) {
-//       text[indexStr]
-//         ? (matrix[i][j] = `${text[indexStr]}`)
-//         : (matrix[i][j] = " ");
-//       if (text[indexStr] === " ") matrix[i][j] = "_";
-//       indexStr++;
-//     }
-//   }
-//   return matrix;
-// }
 function bubbleSort(arr) {
     for (var i = 0, endI = arr.length - 1; i < endI; i++) {
         for (var j = 0, endJ = endI - i; j < endJ; j++) {
@@ -91,16 +76,47 @@ function encrypteText(str, keyWord) {
     // }
     return encText;
 }
-function decrypteText(text, word) {
-    // let decText: string = '';
-    // let decMatrix: Matrix = [];
-    // for (let j = 0; j < word.length; j++) {
-    //   for (let i = 0; i < trMatrix.length; i++) {
-    //     encText += trMatrix[i][j];
+function decrypteText(text, keyword) {
+    var decText = '';
+    var decMatrix = [];
+    // filling matrix
+    var indexStr = 0;
+    for (var i = 0; i < keyWord.length; i++) {
+        decMatrix[i] = [];
+        for (var j = 0; j < Math.ceil(text.length / keyword.length); j++) {
+            decMatrix[i][j] = "" + text[indexStr];
+            indexStr++;
+        }
+    }
+    // simple filling
+    // let indexStr = 0;
+    // for (let i = 0; i < Math.ceil(text.length / keyword.length); i++) {
+    //   decMatrix[i] = [];
+    //   for (let j = 0; j < keyword.length; j++) {
+    //     decMatrix[i][j] = `${text[indexStr]}`
+    //     indexStr++;
     //   }
     // }
-    return;
+    // order for transitions
+    var subseqStr = keyWord.split('');
+    var orderT = keyWord.split('').sort();
+    var resMatrix = [];
+    for (var i = 0; i < subseqStr.length; i++) {
+        resMatrix.push(decMatrix[orderT.indexOf(subseqStr[i])]);
+    }
+    var trMatrix = transposeMatrix(resMatrix);
+    for (var i = 0; i < trMatrix.length; i++) {
+        for (var j = 0; j < trMatrix[0].length; j++) {
+            trMatrix[i][j] === '_'
+                ? (decText += ' ')
+                : (decText += trMatrix[i][j]);
+        }
+    }
+    return decText;
 }
 var encText = encrypteText(str, keyWord); // шифрование текста
-// const decMatrix = createDecMatrix(encText, keyWord);
+var decText = decrypteText(encText, keyWord); // расшифровка текста
+console.log(str);
+console.log(keyWord);
 console.log(encText);
+console.log(decText);
