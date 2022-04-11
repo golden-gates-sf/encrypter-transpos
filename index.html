@@ -4,10 +4,38 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="./style.css">
     <title>Encrypter</title>
 </head>
 <body>
-    
+    <div class="common-container">
+        <div class="main-input-box">
+            <span>Text for encryption:</span>
+            <input>
+            <span>Keyword:</span>
+            <input id="keyword-btn">
+        </div>
+        <div class="enc-dec-buttons">
+            <button>encrypt</button>
+            <button>decrypt</button>
+        </div>
+        <div class="manipul-area"></div>
+    </div>
+    <div class="reactive-container">
+        <div class="reactive-input">
+            <input>
+            <span>Reactive encryption (enter the text) </span>
+        </div>
+        <div class="manipul-area"></div>
+    </div>
+    <div class="reactive-container">
+        <div class="reactive-input">
+            <input>
+            <span>Reactive decryption (enter the text) </span>
+        </div>
+        <div class="manipul-area"></div>
+    </div>
+
     <script src="./script.js"></script>
 </body>
 </html>

@@ -1,0 +1,71 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+input {
+    height: 2rem;
+    width: 20rem;
+    border-radius: 5px;
+    border-color: aquamarine;
+    box-shadow: 10px 5px 5px rgba(128, 128, 128, 0.59);
+    padding: 0 8px;
+}
+
+input:focus {
+  border-color: rgb(5, 158, 87);
+  outline: 0;
+  box-shadow: 10px 5px 5px rgba(128, 128, 128, 0.59);
+}
+
+#keyword-btn {
+    width: 10rem;
+}
+
+button {
+    width: 8rem;
+    border-radius: 5px;
+    border-color: rgb(127, 155, 255);
+}
+
+
+
+.common-container {
+    height: 40vh;
+    padding: 20px 30px 0 30px;
+    display: grid;
+    gap: 1rem;
+}
+
+.main-input-box {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1.8rem;
+}
+
+.enc-dec-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 5rem;
+}
+
+.reactive-container {
+    height: 30vh;
+    padding: 0 30px 0 30px;
+    display: grid;
+    gap: 1rem;
+}
+
+.reactive-input {
+    display: flex;
+    align-items: center;
+    gap: 3rem;
+}
+
+.manipul-area {
+    height: 18vh;
+    border: 1px solid grey;
+    border-radius: 10px;
+}
