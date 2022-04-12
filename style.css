@@ -4,6 +4,11 @@
     box-sizing: border-box;
 }
 
+html {
+    font-family: 'Roboto Condensed', sans-serif;
+    font-size: 20px;
+}
+
 input {
     height: 2rem;
     width: 20rem;
@@ -11,12 +16,16 @@ input {
     border-color: aquamarine;
     box-shadow: 10px 5px 5px rgba(128, 128, 128, 0.59);
     padding: 0 8px;
+    font-family: 'Roboto Mono', monospace;
+}
+
+input:hover {
+    border-color: rgb(5, 158, 87);
 }
 
 input:focus {
-  border-color: rgb(5, 158, 87);
-  outline: 0;
-  box-shadow: 10px 5px 5px rgba(128, 128, 128, 0.59);
+    border-color: rgb(5, 158, 87);
+    outline: 0;
 }
 
 #keyword-btn {
@@ -27,9 +36,18 @@ button {
     width: 8rem;
     border-radius: 5px;
     border-color: rgb(127, 155, 255);
+    transition-duration: 0.3s;
+    font-family: 'Roboto Condensed', sans-serif;
+    font-size: 16px;
 }
 
-
+button:hover {
+    background-color: rgb(127, 155, 255);
+    color: aliceblue;
+    border: none;
+    cursor: pointer;
+    box-shadow: 0px 15px 20px rgba(127, 155, 255, 0.4);
+}
 
 .common-container {
     height: 40vh;
@@ -68,4 +86,6 @@ button {
     height: 18vh;
     border: 1px solid grey;
     border-radius: 10px;
+    font-family: 'Roboto Mono', monospace;
+    font-weight: 400;
 }
