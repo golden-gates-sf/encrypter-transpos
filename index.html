@@ -5,35 +5,36 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" type="text/css" href="./style.css">
+    <link rel="icon" href="./img/premium-icon-email-3202501.png">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto+Condensed&family=Roboto+Mono:wght@300&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Condensed&family=Roboto+Mono:wght@300;400&display=swap" rel="stylesheet">
     <title>Encrypter</title>
 </head>
 <body>
     <div class="common-container">
         <div class="main-input-box">
             <span>Text for encryption:</span>
-            <input>
+            <input id="text-input" type="text">
             <span>Keyword:</span>
-            <input id="keyword-btn">
+            <input id="keyword-input" type="text" style="text-transform: uppercase;" placeholder="No repeated letters">
         </div>
         <div class="enc-dec-buttons">
-            <button>encrypt</button>
-            <button>decrypt</button>
+            <button id="enc-btn">encrypt</button>
+            <button id="dec-btn">decrypt</button>
         </div>
-        <div class="manipul-area"></div>
+        <div class="manipul-area" id="common-text-area"></div>
     </div>
     <div class="reactive-container">
         <div class="reactive-input">
-            <input>
+            <input type="text">
             <span>Reactive encryption (enter the text) </span>
         </div>
         <div class="manipul-area"></div>
     </div>
     <div class="reactive-container">
         <div class="reactive-input">
-            <input>
+            <input type="text">
             <span>Reactive decryption (enter the text) </span>
         </div>
         <div class="manipul-area"></div>

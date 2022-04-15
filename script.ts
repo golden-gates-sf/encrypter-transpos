@@ -1,6 +1,6 @@
-const str: string = "hello000 world";
+let str: string = 'hello000 world'; // hello000 world
 
-const keyWord: string = "WONDER"; // without repeated letters !
+let keyWord: string = 'wonder'; // without repeated letters !
 type Matrix = string[][];
 
 function createMatrix(text: string, keyword: string): Matrix {
@@ -54,7 +54,7 @@ function transposeMatrix(matrix: Matrix): Matrix {
   return trMatr;
 }
 
-function encrypteText(str: string, keyWord: string): string {
+function encryptText(str: string, keyWord: string): string {
   const startMatrix: Matrix = createMatrix(str, keyWord); // преобразование строки в матрицу
   let trMatrix: Matrix = transposeMatrix(startMatrix); // транспонирование матрицы
 
@@ -95,7 +95,7 @@ function encrypteText(str: string, keyWord: string): string {
 }
 
 
-function decrypteText(text: string, keyword: string): string {
+function decryptText(text: string, keyword: string): string {
   let decText: string = '';
   let decMatrix: Matrix = [];
 
@@ -141,11 +141,20 @@ function decrypteText(text: string, keyword: string): string {
   return decText;
 }
 
-const encText: string = encrypteText(str, keyWord); // шифрование текста
-const decText: string = decrypteText(encText, keyWord); // расшифровка текста
+// work with browser
 
-console.log(str);
-console.log(keyWord);
-console.log(encText);
-console.log(decText);
+const encBtn = document.getElementById('enc-btn');
+encBtn.addEventListener('click', () => {
+  str = (<HTMLInputElement>(document.getElementById('text-input'))).value;
+  keyWord = (<HTMLInputElement>(document.getElementById('keyword-input'))).value;
+  const encText: string = encryptText(str, keyWord); // шифрование текста
+  document.getElementById('common-text-area').textContent = encText;
+});
 
+const decBtn = document.getElementById('dec-btn');
+decBtn.addEventListener('click', () => {
+  const encText: string = (<HTMLInputElement>(document.getElementById('text-input'))).value;
+  keyWord = (<HTMLInputElement>(document.getElementById('keyword-input'))).value;
+  const decText: string = decryptText(encText, keyWord); // расшифровка текста
+  document.getElementById('common-text-area').textContent = decText;
+});

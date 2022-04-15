@@ -1,5 +1,5 @@
-var str = "hello000 world";
-var keyWord = "WONDER"; // without repeated letters !
+var str = 'hello000 world'; // hello000 world
+var keyWord = 'wonder'; // without repeated letters !
 function createMatrix(text, keyword) {
     var matrix = [];
     var indexStr = 0;
@@ -45,7 +45,7 @@ function transposeMatrix(matrix) {
     }
     return trMatr;
 }
-function encrypteText(str, keyWord) {
+function encryptText(str, keyWord) {
     var startMatrix = createMatrix(str, keyWord); // преобразование строки в матрицу
     var trMatrix = transposeMatrix(startMatrix); // транспонирование матрицы
     var orderT = getOrder(keyWord); // последовательность для шифрования
@@ -76,7 +76,7 @@ function encrypteText(str, keyWord) {
     // }
     return encText;
 }
-function decrypteText(text, keyword) {
+function decryptText(text, keyword) {
     var decText = '';
     var decMatrix = [];
     // filling matrix
@@ -114,9 +114,18 @@ function decrypteText(text, keyword) {
     }
     return decText;
 }
-var encText = encrypteText(str, keyWord); // шифрование текста
-var decText = decrypteText(encText, keyWord); // расшифровка текста
-console.log(str);
-console.log(keyWord);
-console.log(encText);
-console.log(decText);
+// work with browser
+var encBtn = document.getElementById('enc-btn');
+encBtn.addEventListener('click', function () {
+    str = (document.getElementById('text-input')).value;
+    keyWord = (document.getElementById('keyword-input')).value;
+    var encText = encryptText(str, keyWord); // шифрование текста
+    document.getElementById('common-text-area').textContent = encText;
+});
+var decBtn = document.getElementById('dec-btn');
+decBtn.addEventListener('click', function () {
+    var encText = (document.getElementById('text-input')).value;
+    keyWord = (document.getElementById('keyword-input')).value;
+    var decText = decryptText(encText, keyWord); // расшифровка текста
+    document.getElementById('common-text-area').textContent = decText;
+});

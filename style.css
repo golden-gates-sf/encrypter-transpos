@@ -17,6 +17,9 @@ input {
     box-shadow: 10px 5px 5px rgba(128, 128, 128, 0.59);
     padding: 0 8px;
     font-family: 'Roboto Mono', monospace;
+    font-size: 16x;
+    color: rgb(3, 50, 28);
+    transition-duration: 0.2s;
 }
 
 input:hover {
@@ -28,8 +31,8 @@ input:focus {
     outline: 0;
 }
 
-#keyword-btn {
-    width: 10rem;
+#keyword-input {
+    width: 11rem;
 }
 
 button {
@@ -87,5 +90,7 @@ button:hover {
     border: 1px solid grey;
     border-radius: 10px;
     font-family: 'Roboto Mono', monospace;
-    font-weight: 400;
+    padding: 5px 8px;
+    color: rgb(3, 50, 28);
+    font-weight: 300;
 }
