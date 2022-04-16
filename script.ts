@@ -141,6 +141,8 @@ function decryptText(text: string, keyword: string): string {
   return decText;
 }
 
+// console.log(decryptText('hello000 world', 'wonder')) // some questions
+
 // work with browser
 
 const encBtn = document.getElementById('enc-btn');
@@ -158,3 +160,15 @@ decBtn.addEventListener('click', () => {
   const decText: string = decryptText(encText, keyWord); // расшифровка текста
   document.getElementById('common-text-area').textContent = decText;
 });
+
+const encInput = document.querySelector('.r-enc-input');
+  encInput.addEventListener('input', (e: InputEvent) => {
+  const target = e.target as HTMLInputElement
+  document.getElementById('r-enc-area').textContent = encryptText(target.value, keyWord); 
+});
+
+const decInput = document.querySelector('.r-dec-input');
+  decInput.addEventListener('input', (e: InputEvent) => {
+  const target = e.target as HTMLInputElement
+  document.getElementById('r-dec-area').textContent = decryptText(target.value, keyWord); 
+})

@@ -114,6 +114,7 @@ function decryptText(text, keyword) {
     }
     return decText;
 }
+// console.log(decryptText('hello000 world', 'wonder')) // some questions
 // work with browser
 var encBtn = document.getElementById('enc-btn');
 encBtn.addEventListener('click', function () {
@@ -128,4 +129,14 @@ decBtn.addEventListener('click', function () {
     keyWord = (document.getElementById('keyword-input')).value;
     var decText = decryptText(encText, keyWord); // расшифровка текста
     document.getElementById('common-text-area').textContent = decText;
+});
+var encInput = document.querySelector('.r-enc-input');
+encInput.addEventListener('input', function (e) {
+    var target = e.target;
+    document.getElementById('r-enc-area').textContent = encryptText(target.value, keyWord);
+});
+var decInput = document.querySelector('.r-dec-input');
+decInput.addEventListener('input', function (e) {
+    var target = e.target;
+    document.getElementById('r-dec-area').textContent = decryptText(target.value, keyWord);
 });
