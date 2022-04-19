@@ -9,9 +9,9 @@ function createMatrix(text: string, keyword: string): Matrix {
   for (let i = 0; i < Math.ceil(text.length / keyword.length); i++) {
     matrix[i] = [];
     for (let j = 0; j < keyword.length; j++) {
-      text[indexStr]
-        ? (matrix[i][j] = `${text[indexStr]}`)
-        : (matrix[i][j] = " ");
+      matrix[i][j] = text[indexStr]
+        ? text[indexStr]
+        : " ";
       if (text[indexStr] === " ") matrix[i][j] = "_";
       indexStr++;
     }
@@ -19,19 +19,6 @@ function createMatrix(text: string, keyword: string): Matrix {
 
   return matrix;
 }
-
-// function bubbleSort(arr) {
-//   for (var i = 0, endI = arr.length - 1; i < endI; i++) {
-//     for (var j = 0, endJ = endI - i; j < endJ; j++) {
-//       if (arr[j] > arr[j + 1]) {
-//         var swap = arr[j];
-//         arr[j] = arr[j + 1];
-//         arr[j + 1] = swap;
-//       }
-//     }
-//   }
-//   return arr;
-// }
 
 function getOrder(word: string): number[] {
   let order: number[] = [];
@@ -94,30 +81,40 @@ function encryptText(str: string, keyWord: string): string {
   return encText;
 }
 
-
 function decryptText(text: string, keyword: string): string {
   let decText: string = '';
   let decMatrix: Matrix = [];
 
   // filling matrix
+
+  // let indexStr = 0;
+  // for (let i = 0; i < keyWord.length; i++) {
+  //   decMatrix[i] = [];
+  //   for (let j = 0; j < Math.ceil(text.length / keyword.length); j++) {
+  //     decMatrix[i][j] = `${text[indexStr]}`;
+  //     indexStr++;
+  //   }
+  // }
+
+  // simple filling
   let indexStr = 0;
-  for (let i = 0; i < keyWord.length; i++) {
+  for (let i = 0; i < Math.ceil(text.length / keyword.length); i++) {
     decMatrix[i] = [];
-    for (let j = 0; j < Math.ceil(text.length / keyword.length); j++) {
-      decMatrix[i][j] = `${text[indexStr]}`;
+    for (let j = 0; j < keyword.length; j++) {
+      decMatrix[i][j] = (text[indexStr]) ? text[indexStr] : ' ';
       indexStr++;
     }
   }
   
-  // simple filling
-  // let indexStr = 0;
-  // for (let i = 0; i < Math.ceil(text.length / keyword.length); i++) {
-  //   decMatrix[i] = [];
-  //   for (let j = 0; j < keyword.length; j++) {
-  //     decMatrix[i][j] = `${text[indexStr]}`
-  //     indexStr++;
-  //   }
-  // }
+  console.log(decMatrix);
+
+  let tempMatrix: Matrix = [];
+  for (let i = 0; i < decMatrix.length; i++) {
+    tempMatrix.push(decMatrix[i].slice(0, decMatrix.length));
+    tempMatrix.push(decMatrix[i].slice(decMatrix.length));
+  }
+
+  console.log(tempMatrix);
 
   // order for transitions
   const subseqStr: string[] = keyWord.split('');
@@ -125,7 +122,7 @@ function decryptText(text: string, keyword: string): string {
   let resMatrix: Matrix = [];
 
   for (let i = 0; i < subseqStr.length; i++) {
-    resMatrix.push(decMatrix[orderT.indexOf(subseqStr[i])]);
+    resMatrix.push(tempMatrix[orderT.indexOf(subseqStr[i])]);
   }
 
   let trMatrix: Matrix = transposeMatrix(resMatrix);

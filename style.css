@@ -7,6 +7,7 @@
 html {
     font-family: 'Roboto Condensed', sans-serif;
     font-size: 20px;
+    background-color: rgba(246, 222, 185, 0.493);
 }
 
 input {
@@ -40,7 +41,7 @@ button {
     border-radius: 5px;
     border-color: rgb(127, 155, 255);
     transition-duration: 0.3s;
-    font-family: 'Roboto Condensed', sans-serif;
+    font-family: inherit;
     font-size: 16px;
 }
 
