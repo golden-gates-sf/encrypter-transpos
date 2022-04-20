@@ -56,60 +56,35 @@ function encryptText(str, keyWord) {
             encText += trMatrix[i][j];
         }
     }
-    // считывание в столбик
-    // for (let j = 0; j < trMatrix[0].length; j++) {
-    //   for (let i = 0; i < trMatrix.length; i++) {
-    //     encText += trMatrix[i][j];
-    //   }
-    // }
     return encText;
 }
 function decryptText(text, keyword) {
     var decText = '';
     var decMatrix = [];
     // filling matrix
-    // let indexStr = 0;
-    // for (let i = 0; i < keyWord.length; i++) {
-    //   decMatrix[i] = [];
-    //   for (let j = 0; j < Math.ceil(text.length / keyword.length); j++) {
-    //     decMatrix[i][j] = `${text[indexStr]}`;
-    //     indexStr++;
-    //   }
-    // }
-    // simple filling
     var indexStr = 0;
-    for (var i = 0; i < Math.ceil(text.length / keyword.length); i++) {
+    for (var i = 0; i < keyWord.length; i++) {
         decMatrix[i] = [];
-        for (var j = 0; j < keyword.length; j++) {
-            decMatrix[i][j] = (text[indexStr]) ? text[indexStr] : ' ';
+        for (var j = 0; j < Math.ceil(text.length / keyword.length); j++) {
+            decMatrix[i][j] = text[indexStr] || ' ';
             indexStr++;
         }
     }
-    console.log(decMatrix);
-    var tempMatrix = [];
-    for (var i = 0; i < decMatrix.length; i++) {
-        tempMatrix.push(decMatrix[i].slice(0, decMatrix.length));
-        tempMatrix.push(decMatrix[i].slice(decMatrix.length));
-    }
-    console.log(tempMatrix);
     // order for transitions
     var subseqStr = keyWord.split('');
     var orderT = keyWord.split('').sort();
     var resMatrix = [];
     for (var i = 0; i < subseqStr.length; i++) {
-        resMatrix.push(tempMatrix[orderT.indexOf(subseqStr[i])]);
+        resMatrix.push(decMatrix[orderT.indexOf(subseqStr[i])]);
     }
     var trMatrix = transposeMatrix(resMatrix);
     for (var i = 0; i < trMatrix.length; i++) {
         for (var j = 0; j < trMatrix[0].length; j++) {
-            trMatrix[i][j] === '_'
-                ? (decText += ' ')
-                : (decText += trMatrix[i][j]);
+            decText += (trMatrix[i][j] === '_') ? ' ' : trMatrix[i][j];
         }
     }
     return decText;
 }
-// console.log(decryptText('hello000 world', 'wonder')) // some questions
 // work with browser
 var encBtn = document.getElementById('enc-btn');
 encBtn.addEventListener('click', function () {

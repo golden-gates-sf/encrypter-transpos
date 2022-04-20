@@ -7,7 +7,7 @@
 html {
     font-family: 'Roboto Condensed', sans-serif;
     font-size: 20px;
-    background-color: rgba(246, 222, 185, 0.493);
+    background-color: rgb(246, 222, 185);
 }
 
 input {
@@ -20,7 +20,7 @@ input {
     font-family: 'Roboto Mono', monospace;
     font-size: 16x;
     color: rgb(3, 50, 28);
-    transition-duration: 0.2s;
+    transition-duration: 0.3s;
 }
 
 input:hover {
