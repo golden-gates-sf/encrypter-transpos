@@ -62,9 +62,19 @@ button:hover {
 
 .main-input-box {
     display: flex;
-    justify-content: center;
+    justify-content: end;
     align-items: center;
-    gap: 1.8rem;
+    gap: 1.2rem;
+}
+
+.message-box {
+    width: 16rem;
+}
+
+.error-message {
+    color: rgba(171, 16, 16, 0.864);   
+    font-size: 16px;
+    visibility: hidden;
 }
 
 .enc-dec-buttons {

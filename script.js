@@ -85,18 +85,42 @@ function decryptText(text, keyword) {
     }
     return decText;
 }
+function checkKeyword(keyword) {
+    if (!keyWord)
+        return false;
+    var checkStr = '';
+    for (var _i = 0, keyword_1 = keyword; _i < keyword_1.length; _i++) {
+        var char = keyword_1[_i];
+        if (checkStr.includes(char))
+            return false;
+        checkStr += char;
+    }
+    return true;
+}
 // work with browser
+var errorMessage = document.getElementById('error-message');
+var keywordInput = document.getElementById('keyword-input');
+keywordInput.addEventListener('input', function (e) {
+    var target = e.target;
+    if (!checkKeyword(target.value))
+        errorMessage.style.visibility = 'visible';
+    else
+        errorMessage.style.visibility = 'hidden';
+});
 var encBtn = document.getElementById('enc-btn');
 encBtn.addEventListener('click', function () {
     str = (document.getElementById('text-input')).value;
-    keyWord = (document.getElementById('keyword-input')).value;
-    var encText = encryptText(str, keyWord); // шифрование текста
-    document.getElementById('common-text-area').textContent = encText;
+    if (str && errorMessage.style.visibility === 'hidden') {
+        keyWord = keywordInput.value;
+        var encText = encryptText(str, keyWord); // шифрование текста
+        document.getElementById('common-text-area').textContent = encText;
+    }
 });
 var decBtn = document.getElementById('dec-btn');
 decBtn.addEventListener('click', function () {
     var encText = (document.getElementById('text-input')).value;
-    keyWord = (document.getElementById('keyword-input')).value;
+    if (checkKeyword(keywordInput.value))
+        keyWord = keywordInput.value;
     var decText = decryptText(encText, keyWord); // расшифровка текста
     document.getElementById('common-text-area').textContent = decText;
 });

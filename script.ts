@@ -109,20 +109,41 @@ function decryptText(text: string, keyword: string): string {
   return decText;
 }
 
+function checkKeyword(keyword: string): boolean {
+  if (!keyWord) return false;
+  let checkStr: string = '';
+  for (let char of keyword) {
+    if (checkStr.includes(char)) return false;
+    checkStr += char;
+  }
+
+  return true
+}
+
 // work with browser
+
+const errorMessage = document.getElementById('error-message');
+const keywordInput = document.getElementById('keyword-input');
+keywordInput.addEventListener('input', (e: InputEvent) => {
+  const target = e.target as HTMLInputElement;
+  if (!checkKeyword(target.value)) errorMessage.style.visibility = 'visible'
+  else errorMessage.style.visibility = 'hidden'; 
+});
 
 const encBtn = document.getElementById('enc-btn');
 encBtn.addEventListener('click', () => {
   str = (<HTMLInputElement>(document.getElementById('text-input'))).value;
-  keyWord = (<HTMLInputElement>(document.getElementById('keyword-input'))).value;
-  const encText: string = encryptText(str, keyWord); // шифрование текста
-  document.getElementById('common-text-area').textContent = encText;
+  if (str && errorMessage.style.visibility === 'hidden') {
+    keyWord = (<HTMLInputElement>keywordInput).value;
+    const encText: string = encryptText(str, keyWord); // шифрование текста
+    document.getElementById('common-text-area').textContent = encText;
+  }
 });
 
 const decBtn = document.getElementById('dec-btn');
 decBtn.addEventListener('click', () => {
   const encText: string = (<HTMLInputElement>(document.getElementById('text-input'))).value;
-  keyWord = (<HTMLInputElement>(document.getElementById('keyword-input'))).value;
+  if (checkKeyword((<HTMLInputElement>keywordInput).value)) keyWord = (<HTMLInputElement>keywordInput).value;
   const decText: string = decryptText(encText, keyWord); // расшифровка текста
   document.getElementById('common-text-area').textContent = decText;
 });
